@@ -15,6 +15,7 @@ function sumwhileneg(myarray) {
         }
         tot += x; 
     }
+    return tot;
 }
 function ex_1_I(myarray) {
     return sumwhileneg (myarray);
@@ -54,7 +55,8 @@ function sumOdd(n) {
 }
 
 function ex_2_I(n){
-    return sumOdd(x);
+
+    return sumOdd(n );
 }
 
     
@@ -91,15 +93,18 @@ function ex_3_I(myarray){
 
 
 function avgAllRW(myarray){
-    if (myarray.length ==0){
+    if (myarray.length == 0){
         return 0;
     }else {
-        mayarra[0] + avgAllRW(myarray.slice(1));
+       return myarray[0] + avgAllRW(myarray.slice(1));
     }
+}
+function avgAllR(myarray){
+    return avgAllRW(myarray)/myarray.length;
 }
 
 function ex_3_R(myarray){
-    return avgAllRW(mayarray);
+   return avgAllR( myarray);
 }
 
 
@@ -117,7 +122,7 @@ function ex_3_R(myarray){
 
 function sumIntervalW(a, b){
     var tot = 0;
-    
+
     for (var i = a; i <=b; ++i) {
 
         tot +=i;
