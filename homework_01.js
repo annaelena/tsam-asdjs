@@ -81,7 +81,9 @@ function avgAll(myarray){
     for ( var i = 0; i < myarray.length;++i){
         tot+= myarray[i];
     }
-    return tot /myarray.length;+}
+
+    return tot /myarray.length;
+    }
 function ex_3_I(myarray){
     return avgAll(myarray);
 }
@@ -115,7 +117,9 @@ function ex_3_R(myarray){
 
 function sumIntervalW(a, b){
     var tot = 0;
-    for (var i = a; i <=b, ++i){
+    
+    for (var i = a; i <=b; ++i) {
+
         tot +=i;
     }
     return tot;
@@ -207,7 +211,7 @@ function div ( a, b){
         a = a-b;
         c++;
     }while ( a > b)
-        return c + 'resto' a;
+        return c + 'resto'+ a;
 }
 
 
