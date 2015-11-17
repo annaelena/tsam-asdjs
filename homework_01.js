@@ -216,7 +216,7 @@ function div ( a, b){
         a = a-b;
         c++;
     }while ( a > b)
-        return c + 'resto'+ a;
+        return [c, a];
 }
 
 
@@ -264,3 +264,195 @@ function powR( x,y){
 function ex_7_R(x, y){
     return powR(x, y);
 }
+
+/*Esercizio 8
+
+Dato un array contenente n^2 elementi, scrivere un algoritmo che permetta di inserire tutti gli
+
+oggetti in un array bidimensionale n x n.
+*/
+
+function bidimensionale(myarray) {
+    var n = Math.sqrt(myarray.length);
+    var resarray = [];
+    var row = [];
+    for ( var i = 0; i < myarray.length; ++i) {
+        row[row.length] = myarray[i];
+        if (row.length == n) {
+            resarray.push(row);
+            row = [];
+        }
+    }
+    return resarray;
+}
+
+
+function ex_8_I(myarray) {
+    return bidimensionale(myarray);
+}
+
+
+
+function magic(myarray, matrix) {
+
+      matrix.unshift (myarray);
+
+         return matrix;
+}
+
+function bidimensionaleRInternal(myarray, n){
+    if( myarray.length == n) {
+        return  [myarray];
+    }else {
+        return magic(myarray.slice(0,n), bidimensionaleRInternal(myarray.slice(n), n));
+    }
+}
+
+function bidimensionaleR(myarray) {
+    return bidimensionaleRInternal(myarray, Math.sqrt(myarray.length));
+}
+
+
+function ex_8_R(myarray) {
+    return bidimensionaleR(myarray);
+}    
+   
+
+
+
+
+/*Esercizio 9
+
+Dato una lista di elementi, scrivere un algoritmo che permetta di invertire l’ordine degli
+
+elementi.
+
+Esempio:
+
+Input: A = {2, 5, 8}
+
+Output A= {8, 5, 2}
+*/
+
+function invert(a){
+    b = [] ;
+    for ( i = 0; i < a.length;++i){
+         b[i] = a [a.length-1 - i];
+    }
+        return b; 
+}
+
+function ex_9_I(a){
+    return invert(a);
+}
+
+
+
+function invertR(a){
+    //b = [];
+    if( a.length == 0){
+        return [];
+    }
+        else {
+            var mya = invertR(a.slice(1));
+            mya[mya.length] = a[0]; //mya.push(a)
+            return mya;
+        //return b =[ a[a.length-1]+ ',' +invertR(a.slice(0, a.length-1))];
+    }
+}
+
+
+function ex_9_R(a){
+    return invertR(a);
+}
+
+
+/*Esercizio 10
+
+Dati due interi a, n maggiori di 0, scrivere un algoritmo che crea un lista di n elementi
+
+contenenti a.
+
+Esempio:
+
+replicate(3, 4) => A= {3, 3, 3, 3}
+*/
+
+
+
+function replicate(a,n){
+     b = [];
+     for (i = 0; i < n ;++i){
+        b[i] = a;
+      }
+        return b;
+}
+
+
+function ex_10_I(a,n) {
+    return replicate(a, n);
+}
+
+
+function replicateR(a, n){
+    if (n == 1){
+        return [a];
+    }else{
+        var mya = replicateR(a,n-1)
+        mya[mya.length] = a; //mya.push(a)
+       return mya;
+    }
+}
+
+function ex_10_R(a, n) {
+
+    return replicateR(a,n);
+}
+
+
+
+/*Esercizio 11
+
+Data una lista di interi A, si riordini gli elementi della lista in modo tale che tutti gli elementi
+
+dispari precedano nello stesso ordine tutti gli elementi pari.
+
+Esempio
+
+Input: A = {2, 5, 1, 8}
+
+Output: A = {5, 1, 2, 8}
+*/
+
+
+function ord(myarray){
+        b = [];
+        c = [];
+   
+    for ( i = 0; i < myarray.length; ++i) {
+         
+        if (myarray[i]%2 == 0){
+             b.push(myarray[i]);
+        } else {          
+       
+            c.push(myarray[i]);
+        }
+    }
+    return c.concat(b);
+}  
+
+function ex_11_I(myarray){
+    return ord(myarray);
+} 
+   
+function ordR(myarray){
+    if (myarray.length == 1){
+        return myarray;
+    }else{
+        if (myarray[i]%2 == 0){
+            
+        }
+    }
+}
+        
+
