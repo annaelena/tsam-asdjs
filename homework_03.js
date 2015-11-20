@@ -16,11 +16,9 @@ Array.prototype.buildUntil = function(check) {
     });
     return tmparray;
 }
-Array.prototype.sumuntilnegF3 = function(){
+Array.prototype.ex_1 = function(){
     return this.buildUntil(x => x > 0).reduce((acc, x) => acc + x);
 }
-
-
 
 
 
