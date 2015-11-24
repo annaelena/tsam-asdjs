@@ -22,14 +22,18 @@ Array.prototype.ex_1 = function(){
 
 
 
-
 /*
 +Esercizio 3
 +Dato un array di 10 elementi, calcolarne la media
 +*/
 
-
-
+Array.prototype.ex_3 = function(){
+    var sum = 0;
+    for(var i =0; i < this.length; ++i){
+       sum = sum + this[i]; 
+    }
+    return sum/this.length;
+}
 
 
 /*Esercizio 11
@@ -44,3 +48,18 @@ Input: A = {2, 5, 1, 8}
 
 Output: A = {5, 1, 2, 8}
 */
+
+Array.prototype.ex_11 = function(){
+   var  array1 = [];
+    var array2 = [];
+    this.map( x =>{
+        if ( x%2 == 0){
+            array1.push(x);
+        } if( x%2 != 0){
+            array2.push(x);
+        }
+    });
+
+    return array2.concat(array1);
+ }   
+           
