@@ -107,25 +107,17 @@ function ex_2_F(n){
 +Dato un array di 10 elementi, calcolarne la media
 +*/
 
-function f(myarray){
-    myarray = [];
-    for( var i = 0; i < 10;++i){
-       myarray[i] =i;
-    
+function avg(myarray){
+    function sum(a,b){
+        return a+b;
     }
-    return myarray;
+    return myarray.reduce(sum)/myarray.length;
 }
- function sumAll(myarray){
-     return f(myarray).reduce((acc,x) =>acc + x,0);
- }
-
- function avg(myarray){
-     return sumAll(myarray)/ myarray.length;
- }
 
 function ex_3_F(myarray){
     return avg(myarray);
 }
+
 
 
 /*
@@ -176,12 +168,12 @@ function h(a,b){
 }
 
 function mult(a,b){
-    return h(a, b).reduce((acc,x) => acc +x,0);
+   return h(a,b).reduce((acc,x) => acc + x,0);
 }
 
-function ex_5_F(a,b){
+/*function ex_5_F(a,b){
     return mult(a,b);
-}
+}*/
 
 
 
@@ -256,7 +248,7 @@ Output: A = {5, 1, 2, 8}
 function ft(myarray){
     array1 = [];
     array2 = [];
-    myarray.forEach( x =>{
+    myarray.map( x =>{
         if ( x%2 == 0){
             array1.push(x);
         } if( x%2 != 0){
@@ -269,7 +261,7 @@ function ft(myarray){
            
 function ex_11_F(myarray){
     return ft(myarray);
-}     
+} 
            
        
    
