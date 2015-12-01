@@ -24,34 +24,33 @@ function Stack(){
  
  function rpn (stringa){ 
       var stack = new Stack();
-      var z = stringa.split(" "); 
-            z.forEach(function(z) { 
-            var a1;
-            var a2;
-         switch(z) { 
+      var result = [];
+      var elements = stringa.split(" "); 
+            elements.forEach(element => { 
+         switch(element) { 
              case "+":  
-                 var a1 = stack.pop();  
-                 var a2 = stack.pop();  
-                 stack.push(a2 + a1); 
+                 var x1 = stack.pop();  
+                 var x2 = stack.pop();  
+                 stack.push(x2 + x1); 
                  break; 
              case "-":  
-                 var a1 = stack.pop();  
-                 var a2 = stack.pop();  
-                 stack.push(a2 - a1); 
+                 var x1 = stack.pop();  
+                 var x2 = stack.pop();  
+                 stack.push(x2 - x1); 
                  break; 
              case "*":  
-                 var a1 = stack.pop();  
-                 var a2 = stack.pop();  
-                 stack.push(a2 * a1); 
+                 var x1 = stack.pop();  
+                 var x2 = stack.pop();  
+                 stack.push(x2 * x1); 
                  break;             
               case "/": 
                   
-                 var a1 = stack.pop(); 
-                 var a2 = stack.pop(); 
-                 stack.push(a2 / a1); 
+                 var x1 = stack.pop(); 
+                 var x2 = stack.pop(); 
+                 stack.push(x2 / x1); 
                  break; 
              default: 
-                 stack.push(parseInt(z)); 
+                 stack.push(parseInt(element)); 
          } 
      });         
      return stack.peek(); 

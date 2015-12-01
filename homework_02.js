@@ -162,18 +162,18 @@ function ex_4_F(a,b){
 function h(a,b){
     myarray = [];
     for( i = 0; i < a; ++i){
-        myarray[i] = b;
+        myarray[i] =b ;
     }
     return myarray;
 }
 
-function mult(a,b){
+function mulT(a,b){
    return h(a,b).reduce((acc,x) => acc + x,0);
 }
 
-/*function ex_5_F(a,b){
-    return mult(a,b);
-}*/
+function ex_5_F(a,b){
+    return mulT(a,b);
+}
 
 
 

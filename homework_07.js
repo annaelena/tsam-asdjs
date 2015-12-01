@@ -1,28 +1,47 @@
 /*priorityQueue*/
+
+ function QueueElement ( i, p){
+        this.item = i;
+        this.priority = p;
+    }
+
+
+
 function PriorityQueue (){
-    var items = [];
-
-    function QueueElement ( element, priority){
-        this.element = element;
-        this.priority = priority;
-    }
-    this.enqueue = function( element, priority){
-        var queueElement = new QueueElement (element, priority);
-
-        if ( this.isEmpty()){
-            items.push(queueElement);
-        }else{
-            var added = false;
-            for (var i = 0; i < items.length; ++i){
-                if( queueElement.priority < items[i].priority){
-                    items.slice(i,0, queueElement);
-                    added = true;
-                    break;
-                }
-            }
-            if (!added){
-                items.push(queueElement);
-            }
-        }
-    }
+    this.queue = [];
 }
+PriorityQueue.prototype.enqueue = function(e) {
+       for( var i = 0;
+            i < this,size() && e.priority > this.queue[i].priority;
+            ++i);
+       this.queue.splice(i, 0, e);
+}
+
+PriorityQueue.prototype.dequeue = function() { return this.queue.pop();}
+PriorityQueue.prototype.front = function() { return this.queue[this.queue.length -1];}
+PriorityQueue.size = function() { return this.queue.length;}
+PriorityQueue.prototype.isEmpty = function() { return this.size() ==0;}
+
+
+
+/*callback*/
+
+
+function PriorityQueueC(sortfunction) {
+    this.queue = [];
+    this.callback = sortfunction;
+}
+
+PriorityQueueC.prototype.enqueue = function(e) {
+    for ( var i = 0;
+         i < this.size() && this.callback( e.priority, this.queue[i].priority) ==1;
+         ++i);
+
+    this.queue.splice(i, 0, e);
+
+}
+
+PriorityQueueC.prototype.dequeue = function() { return this.queue.pop();}
+PriorityQueueC.prototype.front = function() { return this.queue[this.queue.length -1];}
+PriorityQueueC.size = function() { return this.queue.length;}
+PriorityQueueC.prototype.isEmpty = function() { return this.size() ==0;}
