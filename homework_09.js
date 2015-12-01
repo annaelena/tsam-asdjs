@@ -19,15 +19,11 @@ function ex_1a(array){
 function g(array){
    if (array.length == 0){
        return 0;
-   }else{
-       var newarray =[];
-       array.filter( x => {
-           if( x%2 == 0){
-               newarray.push(x);
-           }
-       });
-       return newarray.reduce((acc,x) => acc+(x*x),0);
    }
+   if( array[i]%2 ==0){
+       return (array[0]*array[0]) + g(array.slice(1));
+   }
+   return g(array.slice(1));
 }
 
 function ex_1b(array){
@@ -40,14 +36,9 @@ function ex_1b(array){
 
 
 function sumEven(array){
-   var newArray = [];
-   array.every( x => {
-       if ( x%2 == 0){
-           newArray.push(x);
-       }
-       return newArray;
-   });
-   return newArray.reduce((acc,x) => acc+(x*x),0);
+   var newArray = array.filter( x => x%2 == 0);
+    newArray = newArray.map(x => x*x);
+        return newArray.reduce((acc,x) => acc+x);
  }
 
  function ex_2(array){
@@ -69,23 +60,24 @@ Stack.prototype.isEmpty = function() { return this.myarray.length == 0; }
 function Sum(array){
     var sp = new Stack;
     var sd = new Stack;
-    array.every( x =>{
-        if(x%2==0){
-            sp.push(x);
+    for(i = 0; i < array.length; ++i) {
+        if(array[i]%2 ==0){
+            sp.push(array[i]);
         }else{
-            sd.push(x);
+            sd.push(array[i]);
         }
-    });
-    return sp;
-    var x1;
-    var x2;
-    var result =[];
-    for ( i =0; i <sp.length==sd.length;++i){
-        var x1 = sp.pop();
-        var x2 = sd.pop();
-        result.push(x1*x2);
+
     }
-    return result;
+ 
+    var result = new Stack;
+  while(!sp.isEmpty() && !sd.isEmpty()) {
+        result.push(sp.pop() * sd.pop());
+    }
+   var sum = 0;
+   while(!result.isEmpty()){
+       sum +=result.pop();
+   }
+   return sum;
 
 
 }
@@ -121,66 +113,78 @@ Queue.prototype.size = function() {
 
 /*Ex_04/Implementare LinkedList*/
 
-/*a)*/
+
+
 function LinkedList() {
-    var Node = function (e){
-        this.e = e;
-        this.next = null;
-    }
-    var length = 0;
-    var head = null;
-    this.add = function( position, e){
-        if (position >= 0 && position <= length){
 
-            var node = new Node(e),
-                current = head,
-                previous,
-                index = 0;
-            if( position === 0) {
-                node.next = current;
-                head = node;
-            }else{
-                while ( index++ < position){
-                    previous = current;
-                    current = current.next;
-                }
-                node.next = node;
-                previous.next = node;
-            }
-                length++;
-                return true;
-            }else {
-                return false;
-            }
-      }
+    var Node = function(item, succ, prec) {
+        this.item = item;
+        this.succ = succ;
+        this.prec;
+    };
+
+    this.first = null;
+    this.last = null;
+}
+
+LinkedList.prototype.getNode =  function(index) {
+    function nodeR(node, i) {
+        if (index == i || node == null)
+            return node;
+        else
+            return nodeR(node.succ, i + 1);
+    }
+    return nodeR( this.first, 0);
+}
+
+LinkedList.prototype.get = function(index) {
+
+    var node =this.getNode(index);
+    if(node == null){
+        return null;
+    }else{
+        return node.item
+    }
 }
 
 
+LinkedList.prototype.add = function(index, e) {
+    var node = this.getNode(index);
 
-/*b)*/
-
-function LinkedList(){
-    var Node = function(e){
-        this.e = e;
-        this.next = null;
+    if( this.first == null) {
+        var newNode = new Node (e, null, null);
+        this.first = newNode;
+        this.last = newNode;
+        return;
     }
-    var length = 0;
-    var head = null;
 
-    this.get = function (e){
-        var current = head,
-            index = -1;
 
-        while ( current){
-            if ( e === current.e){
-            return index;
-            }
-            index++;
-            current = current.next;
+    if( node == null) {
+        var newNode = new Node(e, this.last, null);
+        this.last.succ = newNode;
+        this.last = newNode;
+    }else{ 
+
+        if (index == 0) {
+            var newNode = new Node(e, null,node);
+            node.prec = newNode;
+            this.first = newNode;
         }
-        return -1;
+
+
+        if (index != 0){ 
+        var newNode =new Node(e, node.prec, node);
+        node.prec.succ = newNode;
+        node.prec = newNode;
+        }
+
     }
 }
+
+
+
+
+
 
 
 /*Ex_05/Implimentare Tree, cercare un valore, se esiste ritorna il valore, se no ritorna null.*/
@@ -244,7 +248,7 @@ BST.prototype.exist = function(e) {
 } 
 
 
-function inOrder(node, callback) {
+/*function inOrder(node, callback) {
     if (node != null) {
         inOrder(node.left, callback);
         callback(node.item);
@@ -270,24 +274,27 @@ function postOrder(node, callback) {
     }
 }
 
-postOrder(tree.root, function(e) { console.log(e);  })
+postOrder(tree.root, function(e) { console.log(e);  })*/
 
 
-BST.prototype.searchNode = function(currentNode, e){
-    if ( currentNode === null){
+BST.prototype.searchNodeR = function(node, e) {
+    if (node == null) {
         return null;
-    }
-    if( e < currentNode.item ){
-        return searchNode( currentNode.left, e);
-    }else if( e > currentNode.item){
-        return searchNode(currentNode.right,e);
-    }
-    else{
-        return e;
+    } else {
+        if (node.item == e) {
+            return node;
+        } else {
+            if (e > node.item) {
+                return this.searchNodeR(node.right, e)
+            } else {
+                return this.searchNodeR(node.left, e)
+            }
+        }
     }
 }
 
-BST.prototype.search = function(e) {
-    
-    return this.searchNode(this.root,e);
+BST.prototype.searchNode = function(e) {
+    return this.searchNodeR(this.root, e);
 }
+
+
