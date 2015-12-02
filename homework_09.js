@@ -57,7 +57,7 @@ Stack.prototype.pop = function(){return this.myarray.pop(); }
 Stack.prototype.peek = function(){return this.myarray[this.myarray.length-1]; }
 Stack.prototype.isEmpty = function() { return this.myarray.length == 0; }
 
-function Sum(array){
+function h(array){
     var sp = new Stack;
     var sd = new Stack;
     for(i = 0; i < array.length; ++i) {
@@ -66,20 +66,21 @@ function Sum(array){
         }else{
             sd.push(array[i]);
         }
-
-    }
+     }
  
     var result = new Stack;
-  while(!sp.isEmpty() && !sd.isEmpty()) {
+    while(!sp.isEmpty() && !sd.isEmpty()) {
         result.push(sp.pop() * sd.pop());
     }
-   var sum = 0;
-   while(!result.isEmpty()){
+    var sum = 0;
+    while(!result.isEmpty()){
        sum +=result.pop();
    }
    return sum;
+}
 
-
+function ex_3(array){
+    return h(array)
 }
  
 
