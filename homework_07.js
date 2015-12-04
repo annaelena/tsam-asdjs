@@ -12,7 +12,7 @@ function PriorityQueue (){
 }
 PriorityQueue.prototype.enqueue = function(e) {
        for( var i = 0;
-            i < this,size() && e.priority > this.queue[i].priority;
+            i < this.size() && e.priority > this.queue[i].priority;
             ++i);
        this.queue.splice(i, 0, e);
 }
